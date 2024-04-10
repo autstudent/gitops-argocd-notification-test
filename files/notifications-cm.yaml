@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: NotificationsConfiguration
+metadata:
+  name: default-notifications-configuration
+  namespace: openshift-gitops
+spec:
+  services:
+    service.webhook.app-sync: |
+      url: http://nginx.default.svc.cluster.local
+      headers:
+      - name: testheader
+        value: testdata01
+  templates:
+    template.app-sync-status: |
+      webhook:
+        app-sync:
+          method: POST
+          path: /repos/{{call .repo.FullNameByRepoURL .app.spec.source.repoURL}}/statuses/{{.app.status.operationState.operation.sync.revision}}
+          body: |
+            {
+              {{if eq .app.status.operationState.phase "Running"}} "state": "pending"{{end}}
+              {{if eq .app.status.operationState.phase "Succeeded"}} "state": "success"{{end}}
+              {{if eq .app.status.operationState.phase "Error"}} "state": "error"{{end}}
+              {{if eq .app.status.operationState.phase "Failed"}} "state": "error"{{end}},
+              "description": "ArgoCD",
+              "target_url": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+              "context": "continuous-delivery/{{.app.metadata.name}}",
+              "status": "continuous-delivery/{{.app.status}}",
+              "metadata": "continuous-delivery/{{.app.metadata}}"
+            }
+  triggers:
+    trigger.on-sync-status-unknown: |
+      - when: app.status.sync.status == 'Succeeded'
+        send: [app-sync]
