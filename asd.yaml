@@ -1,23 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: express-deployment
   namespace: default
-  annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.app-sync: ""
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app: express
   replicas: 2
   template:
     metadata:
       labels:
-        app: nginx
+        app: express
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: express
+        image: quay.io/acidonpe/express-post
         ports:
         - containerPort: 80
 ---
@@ -25,12 +23,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: express
   namespace: default
 spec:
   selector:
-    app: nginx
+    app: express
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8888

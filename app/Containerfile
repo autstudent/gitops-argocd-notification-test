@@ -1,0 +1,17 @@
+FROM registry.access.redhat.com/ubi9/nodejs-18
+
+WORKDIR /usr/src/app
+
+# Copy in package.json and package-lock.json
+COPY --chown=1001:1001 package*.json ./
+
+# Install dependencies and devDependencies
+RUN npm ci
+
+# Copy in source code and other assets
+COPY --chown=1001:1001 . .
+
+EXPOSE 8888
+
+ENTRYPOINT [ "node" ]
+CMD [ "./src/index.js" ]

@@ -6,12 +6,12 @@ metadata:
 spec:
   services:
     service.webhook.app-sync-server-post: |
-      url: http://nginx.default.svc.cluster.local
+      url: http://express.default.svc.cluster.local
       headers:
       - name: testheader
         value: testdata01
     service.webhook.app-sync-body-info: |
-      url: http://nginx.default.svc.cluster.local
+      url: http://express.default.svc.cluster.local
       headers:
       - name: testheader
         value: testdata01
