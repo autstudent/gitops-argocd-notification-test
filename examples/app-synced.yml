@@ -1,0 +1,260 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: '2024-04-10T15:46:43Z'
+  generation: 167
+  managedFields:
+    - apiVersion: argoproj.io/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          .: {}
+          'f:destination':
+            .: {}
+            'f:namespace': {}
+            'f:server': {}
+          'f:project': {}
+          'f:source':
+            .: {}
+            'f:path': {}
+            'f:repoURL': {}
+            'f:targetRevision': {}
+        'f:status':
+          .: {}
+          'f:health': {}
+          'f:summary': {}
+          'f:sync':
+            .: {}
+            'f:comparedTo':
+              .: {}
+              'f:destination': {}
+              'f:source': {}
+      manager: argocd-server
+      operation: Update
+      time: '2024-04-11T10:38:53Z'
+    - apiVersion: argoproj.io/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:history': {}
+          'f:sourceType': {}
+          'f:controllerNamespace': {}
+          'f:sync':
+            'f:comparedTo':
+              'f:destination':
+                'f:namespace': {}
+                'f:server': {}
+              'f:source':
+                'f:path': {}
+                'f:repoURL': {}
+                'f:targetRevision': {}
+            'f:revision': {}
+            'f:status': {}
+          'f:health':
+            'f:status': {}
+          'f:resources': {}
+          'f:summary':
+            'f:images': {}
+          'f:reconciledAt': {}
+          'f:operationState':
+            .: {}
+            'f:finishedAt': {}
+            'f:message': {}
+            'f:operation':
+              .: {}
+              'f:info': {}
+              'f:initiatedBy':
+                .: {}
+                'f:username': {}
+              'f:retry': {}
+              'f:sync':
+                .: {}
+                'f:revision': {}
+                'f:syncStrategy':
+                  .: {}
+                  'f:hook': {}
+            'f:phase': {}
+            'f:startedAt': {}
+            'f:syncResult':
+              .: {}
+              'f:resources': {}
+              'f:revision': {}
+              'f:source':
+                .: {}
+                'f:path': {}
+                'f:repoURL': {}
+                'f:targetRevision': {}
+      manager: argocd-application-controller
+      operation: Update
+      time: '2024-04-11T11:16:32Z'
+  name: test
+  namespace: openshift-gitops
+  resourceVersion: '481735'
+  uid: 111debea-296c-4d23-b7e2-a85d25ff1076
+spec:
+  destination:
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: .
+    repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+    targetRevision: HEAD
+status:
+  resources:
+    - health:
+        status: Healthy
+      kind: Service
+      name: nginx
+      namespace: default
+      status: Synced
+      version: v1
+    - group: apps
+      health:
+        status: Healthy
+      kind: Deployment
+      name: nginx-deployment
+      namespace: default
+      status: Synced
+      version: v1
+  summary:
+    images:
+      - 'nginx:latest'
+  reconciledAt: '2024-04-11T11:16:32Z'
+  operationState:
+    finishedAt: '2024-04-11T10:38:54Z'
+    message: successfully synced (all tasks run)
+    operation:
+      info:
+        - name: prueba
+          value: '2222222'
+      initiatedBy:
+        username: admin
+      retry: {}
+      sync:
+        revision: be7183616431c9b5c003ca7b7fa8fb776f2c6539
+        syncStrategy:
+          hook: {}
+    phase: Succeeded
+    startedAt: '2024-04-11T10:38:53Z'
+    syncResult:
+      resources:
+        - syncPhase: Sync
+          message: service/nginx unchanged
+          name: nginx
+          status: Synced
+          kind: Service
+          version: v1
+          hookPhase: Running
+          namespace: default
+          group: ''
+        - syncPhase: Sync
+          message: deployment.apps/nginx-deployment configured
+          name: nginx-deployment
+          status: Synced
+          kind: Deployment
+          version: v1
+          hookPhase: Running
+          namespace: default
+          group: apps
+      revision: be7183616431c9b5c003ca7b7fa8fb776f2c6539
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+  history:
+    - deployStartedAt: '2024-04-11T10:25:42Z'
+      deployedAt: '2024-04-11T10:25:42Z'
+      id: 11
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:30:37Z'
+      deployedAt: '2024-04-11T10:30:37Z'
+      id: 12
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:31:29Z'
+      deployedAt: '2024-04-11T10:31:29Z'
+      id: 13
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:32:45Z'
+      deployedAt: '2024-04-11T10:32:45Z'
+      id: 14
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:34:23Z'
+      deployedAt: '2024-04-11T10:34:24Z'
+      id: 15
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:34:56Z'
+      deployedAt: '2024-04-11T10:34:56Z'
+      id: 16
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:34:58Z'
+      deployedAt: '2024-04-11T10:34:58Z'
+      id: 17
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:35:01Z'
+      deployedAt: '2024-04-11T10:35:01Z'
+      id: 18
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:36:42Z'
+      deployedAt: '2024-04-11T10:36:42Z'
+      id: 19
+      revision: 41b5142093280f7bbb9d2ccd4fdf5c2af6670129
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    - deployStartedAt: '2024-04-11T10:38:53Z'
+      deployedAt: '2024-04-11T10:38:54Z'
+      id: 20
+      revision: be7183616431c9b5c003ca7b7fa8fb776f2c6539
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+  sourceType: Directory
+  sync:
+    comparedTo:
+      destination:
+        namespace: default
+        server: 'https://kubernetes.default.svc'
+      source:
+        path: .
+        repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+        targetRevision: HEAD
+    revision: be7183616431c9b5c003ca7b7fa8fb776f2c6539
+    status: Synced
+  health:
+    status: Healthy
+  controllerNamespace: openshift-gitops

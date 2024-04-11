@@ -5,19 +5,25 @@ metadata:
   namespace: openshift-gitops
 spec:
   services:
-    service.webhook.app-sync: |
+    service.webhook.app-sync-server-post: |
+      url: http://nginx.default.svc.cluster.local
+      headers:
+      - name: testheader
+        value: testdata01
+    service.webhook.app-sync-body-info: |
       url: http://nginx.default.svc.cluster.local
       headers:
       - name: testheader
         value: testdata01
   templates:
-    template.app-sync-status: |
+    template.app-sync-server-post-trigger: |
       webhook:
-        app-sync:
+        app-sync-server-post:
           method: POST
-          path: /repos/{{call .repo.FullNameByRepoURL .app.spec.source.repoURL}}/statuses/{{.app.status.operationState.operation.sync.revision}}
+          path: /
           body: |
             {
+              "id": "{{.app.status.operationState.operation.info}}",
               {{if eq .app.status.operationState.phase "Running"}} "state": "pending"{{end}}
               {{if eq .app.status.operationState.phase "Succeeded"}} "state": "success"{{end}}
               {{if eq .app.status.operationState.phase "Error"}} "state": "error"{{end}}
@@ -28,7 +34,19 @@ spec:
               "status": "continuous-delivery/{{.app.status}}",
               "metadata": "continuous-delivery/{{.app.metadata}}"
             }
+    template.app-sync-body-info-trigger: |
+      webhook:
+        app-sync-body-info:
+          method: POST
+          path: /
+          body: |
+            {
+              "app": "{{.app}}",
+              "context": "{{.context}}",
+              "serviceType": "{{.serviceType}}",
+              "recipient": "{{.recipient}}"
+            }      
   triggers:
-    trigger.on-sync-status-unknown: |
-      - when: app.status.sync.status == 'Succeeded'
-        send: [app-sync]
+    trigger.on-sync-succeeded: |
+      - when: app.status.sync.status == 'Synced'
+        send: [app-sync-server-post-trigger, app-sync-body-info-trigger]

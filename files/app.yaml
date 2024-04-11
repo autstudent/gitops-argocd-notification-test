@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test
+  namespace: openshift-gitops
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded: "default"
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: .
+    repoURL: 'https://github.com/autstudent/gitops-argocd-notification-test.git'
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated: null
