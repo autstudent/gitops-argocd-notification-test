@@ -125,14 +125,14 @@ status:
     finishedAt: '2024-04-11T10:38:54Z'
     message: successfully synced (all tasks run)
     operation:
-      info:
+      info:                                                 #### IMPORTANT
         - name: prueba
           value: '2222222'
       initiatedBy:
         username: admin
       retry: {}
       sync:
-        revision: be7183616431c9b5c003ca7b7fa8fb776f2c6539
+        revision: be7183616431c9b5c003ca7b7fa8fb776f2c6539  #### IMPORTANT
         syncStrategy:
           hook: {}
     phase: Succeeded
@@ -149,7 +149,7 @@ status:
           namespace: default
           group: ''
         - syncPhase: Sync
-          message: deployment.apps/nginx-deployment configured
+          message: deployment.apps/nginx-deployment configured    #### IMPORTANT
           name: nginx-deployment
           status: Synced
           kind: Deployment

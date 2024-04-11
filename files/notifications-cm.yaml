@@ -48,5 +48,9 @@ spec:
             }      
   triggers:
     trigger.on-sync-succeeded: |
-      - when: app.status.sync.status == 'Synced'
+      # - when: app.status.sync.status == 'Synced'
+      #   send: [app-sync-server-post-trigger, app-sync-body-info-trigger]
+      - when: app.status.operationState.phase in ['Succeeded']
+        send: [app-sync-server-post-trigger, app-sync-body-info-trigger]
+      - when: app.status.operationState.phase in ['Error', 'Failed']
         send: [app-sync-server-post-trigger, app-sync-body-info-trigger]
