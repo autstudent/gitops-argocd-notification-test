@@ -4,7 +4,8 @@ metadata:
   name: test
   namespace: openshift-gitops
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded: "default"
+    notifications.argoproj.io/subscribe.on-sync-succeeded.app-sync-server-post: ""
+    notifications.argoproj.io/subscribe.on-sync-succeeded.app-sync-body-info: ""
 spec:
   destination:
     name: ''
